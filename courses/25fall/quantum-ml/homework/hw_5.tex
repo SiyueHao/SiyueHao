@@ -1,0 +1,124 @@
+\documentclass[12pt]{article}
+\usepackage[UTF8]{ctex}
+\usepackage{amsmath,amssymb}
+\usepackage{braket}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+
+% 页面设置
+\geometry{a4paper, margin=1in}
+
+% 页眉页脚
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{量子计算与机器学习第五章作业}
+\fancyhead[R]{\today}
+\fancyfoot[C]{\thepage}
+
+% 标题信息
+\title{\textbf{量子计算与机器学习第五章作业}}
+\author{姓名：郝思粤 \quad 学号：PB23151779}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\textbf{题目 5.1} 设 $\ket{x}$ 是 $n$ 比特计算基中的一个基矢，
+证明
+\begin{equation}
+H^{\otimes n}\ket{x}
+= \frac{1}{\sqrt{2^n}}
+\sum_{z\in\{0,1\}^n} (-1)^{x\cdot z} \ket{z},
+\end{equation}
+其中 $x\cdot z$ 表示按位内积
+\(
+x\cdot z = \sum_{j=1}^{n} x_j z_j \pmod 2,
+\)
+$x_j,z_j\in\{0,1\}$ 为 $x,z$ 的第 $j$ 位比特。
+
+\bigskip
+
+\textbf{解：}
+
+首先回顾单比特 Hadamard 门 $H$ 对计算基矢的作用：
+\begin{equation}
+H\ket{0} = \frac{\ket{0}+\ket{1}}{\sqrt{2}},\qquad
+H\ket{1} = \frac{\ket{0}-\ket{1}}{\sqrt{2}}.
+\end{equation}
+这可以统一写成
+\begin{equation}\label{eq:single}
+H\ket{x_j} = \frac{\ket{0} + (-1)^{x_j}\ket{1}}{\sqrt{2}},
+\qquad x_j\in\{0,1\}.
+\end{equation}
+
+令
+\(
+x = x_1 x_2 \dots x_n
+\)
+为 $n$ 比特计算基矢对应的比特串，则
+\(
+\ket{x} = \ket{x_1}\otimes\ket{x_2}\otimes\cdots\otimes\ket{x_n}.
+\)
+对其施加 $n$ 个 Hadamard 门的张量积 $H^{\otimes n}$，得到
+\begin{align}
+H^{\otimes n}\ket{x}
+&= \bigl(H\ket{x_1}\bigr)\otimes\bigl(H\ket{x_2}\bigr)\otimes\cdots\otimes\bigl(H\ket{x_n}\bigr)\\
+&\overset{\eqref{eq:single}}{=}
+\left(\frac{\ket{0}+(-1)^{x_1}\ket{1}}{\sqrt{2}}\right)
+\otimes
+\left(\frac{\ket{0}+(-1)^{x_2}\ket{1}}{\sqrt{2}}\right)
+\otimes \cdots \otimes
+\left(\frac{\ket{0}+(-1)^{x_n}\ket{1}}{\sqrt{2}}\right)\\
+&=
+\frac{1}{\sqrt{2^n}}
+\left(\ket{0}+(-1)^{x_1}\ket{1}\right)
+\otimes
+\left(\ket{0}+(-1)^{x_2}\ket{1}\right)
+\otimes\cdots\otimes
+\left(\ket{0}+(-1)^{x_n}\ket{1}\right).
+\end{align}
+
+把上式按张量积逐项展开。  
+每一项都对应一个比特串
+\(
+z=z_1 z_2\dots z_n\in\{0,1\}^n,
+\)
+其中
+\(
+z_j=0
+\)
+表示在第 $j$ 个括号中选择 $\ket{0}$，
+而
+\(
+z_j=1
+\)
+表示选择 $(-1)^{x_j}\ket{1}$。  
+因此，展开后的一般项为
+\begin{equation}
+\prod_{j=1}^{n}(-1)^{x_j z_j} \ket{z_1}\otimes\ket{z_2}\otimes\cdots\otimes\ket{z_n}
+= (-1)^{\sum_{j=1}^{n} x_j z_j}\ket{z},
+\end{equation}
+其中
+\(
+\ket{z}=\ket{z_1 z_2\dots z_n}.
+\)
+
+注意指数
+\(
+\sum_{j=1}^{n} x_j z_j
+\)
+只在模 $2$ 意义下取值（因为 $x_j,z_j\in\{0,1\}$ 且 $(-1)^k$ 只依赖 $k$ 的奇偶性），
+这恰好就是题目中的按位内积 $x\cdot z$。  
+于是整个展开可写作
+\begin{equation}
+H^{\otimes n}\ket{x}
+=
+\frac{1}{\sqrt{2^n}}
+\sum_{z\in\{0,1\}^n}
+(-1)^{x\cdot z} \ket{z},
+\end{equation}
+这正是要证明的式子。
+
+\hfill$\blacksquare$
+
+\end{document}

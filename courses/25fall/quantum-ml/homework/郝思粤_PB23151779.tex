@@ -1,0 +1,192 @@
+\documentclass[12pt,a4paper,oneside]{ctexart}
+\usepackage{amsmath,amsthm,amssymb,bm,color,framed,graphicx,hyperref,mathrsfs,fancyhdr}
+
+\title{\textbf{量子计算与机器学习第三章作业}}
+\author{郝思粤 \\ 学号 PB23151779 \\ 中国科学技术大学}
+\date{\today}
+\linespread{1.5}
+\definecolor{shadecolor}{RGB}{241,241,255}
+
+% 页眉页脚
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{量子计算与机器学习第三章作业}
+\fancyhead[R]{PB23151779}
+\fancyfoot[C]{\thepage}
+
+% Problem 环境
+\newcounter{problemname}
+\newenvironment{problem}{
+    \begin{shaded}
+    \stepcounter{problemname}
+    \addcontentsline{toc}{section}{题目\arabic{problemname}}
+    \noindent\textbf{题目\arabic{problemname}. }
+}{
+    \end{shaded}\par
+}
+\newenvironment{solution}{
+    \addcontentsline{toc}{subsection}{解答}
+    \noindent\textbf{解答. }
+}{\par}
+\newenvironment{note}{
+    \addcontentsline{toc}{subsection}{注记}
+    \noindent\textbf{题目\arabic{problemname}的注记. }
+}{\par}
+
+\begin{document}
+\maketitle
+\newpage
+
+% ---------------- Problem 1 ----------------
+\begin{problem}
+\textbf{(Exercise 3.1 保真度与 Bloch 夹角)} \;
+两个量子态 $\lvert\psi_1\rangle$ 与 $\lvert\psi_2\rangle$ 的保真度定义为
+\[
+F \equiv \bigl|\langle \psi_1 \mid \psi_2 \rangle\bigr|^2.
+\]
+它满足 $0\le F \le 1$，当两态相同 $F=1$，当两态正交 $F=0$。设 $\alpha$ 为这两个态在 Bloch 球上对应 Bloch 向量之间的夹角，证明
+\[
+F=\cos^2 \frac{\alpha}{2}.
+\]
+\end{problem}
+
+\begin{solution}
+
+ 单比特纯态可以在 Bloch 球上参数化为
+\[
+\lvert\psi(\theta,\phi)\rangle=\cos\frac{\theta}{2}\lvert0\rangle
++ e^{i\phi}\sin\frac{\theta}{2}\lvert1\rangle,
+\]
+其 Bloch 向量为
+\[
+\bm{n}(\theta,\phi)=
+\bigl(\sin\theta\cos\phi,\;\sin\theta\sin\phi,\;\cos\theta\bigr).
+\]
+设
+\[
+\lvert\psi_1\rangle=\lvert\psi(\theta_1,\phi_1)\rangle,\qquad
+\lvert\psi_2\rangle=\lvert\psi(\theta_2,\phi_2)\rangle,
+\]
+对应 Bloch 向量分别为 $\bm{n}_1,\bm{n}_2$，其夹角为 $\alpha$，即
+$\bm{n}_1\!\cdot\!\bm{n}_2=\cos\alpha$。
+
+\medskip
+\textbf{计算内积：}
+\begin{align*}
+\langle\psi_1\mid\psi_2\rangle
+&=\Bigl(\cos\tfrac{\theta_1}{2}\langle0|+e^{-i\phi_1}\sin\tfrac{\theta_1}{2}\langle1|\Bigr)
+\Bigl(\cos\tfrac{\theta_2}{2}|0\rangle+e^{i\phi_2}\sin\tfrac{\theta_2}{2}|1\rangle\Bigr)\\
+&=\cos\tfrac{\theta_1}{2}\cos\tfrac{\theta_2}{2}
++e^{i(\phi_2-\phi_1)}\sin\tfrac{\theta_1}{2}\sin\tfrac{\theta_2}{2}.
+\end{align*}
+取模平方，
+\begin{align*}
+F
+&=\left|\cos\tfrac{\theta_1}{2}\cos\tfrac{\theta_2}{2}
++e^{i(\phi_2-\phi_1)}\sin\tfrac{\theta_1}{2}\sin\tfrac{\theta_2}{2}\right|^2\\
+&=\cos^2\tfrac{\theta_1}{2}\cos^2\tfrac{\theta_2}{2}
++\sin^2\tfrac{\theta_1}{2}\sin^2\tfrac{\theta_2}{2}
++2\cos(\phi_2-\phi_1)\cos\tfrac{\theta_1}{2}\cos\tfrac{\theta_2}{2}
+\sin\tfrac{\theta_1}{2}\sin\tfrac{\theta_2}{2}.
+\end{align*}
+
+\textbf{化简：} 使用恒等式
+\[
+\cos^2\frac{a}{2}=\frac{1+\cos a}{2},\qquad
+\sin^2\frac{a}{2}=\frac{1-\cos a}{2},\qquad
+2\cos\frac{a}{2}\sin\frac{a}{2}=\sin a,
+\]
+得到
+\[
+F=\frac{1}{2}\Bigl(1+\cos\theta_1\cos\theta_2+\sin\theta_1\sin\theta_2\cos(\phi_2-\phi_1)\Bigr).
+\]
+而括号内正是 $\bm{n}_1\!\cdot\!\bm{n}_2=\cos\alpha$，因此
+\[
+F=\frac{1+\cos\alpha}{2}=\cos^2\frac{\alpha}{2}.
+\]
+证毕。
+\end{solution}
+
+\begin{note}
+直观上，Bloch 球上两点越接近（$\alpha$ 越小），内积越大，故 $F$ 越接近 $1$；相反若相距 $180^\circ$，则 $F=0$。公式 $F=\cos^2(\alpha/2)$ 精确刻画了这种“几何距离—量子重叠”的关系。
+\end{note}
+
+% ---------------- Problem 2 ----------------
+\begin{problem}
+\textbf{(Exercise 3.2 用 $R_z$ 与 $H$ 构造两态间的酉变换)} \;
+证明把 Bloch 球上由角参数 $(\theta_1,\phi_1)$ 描述的量子态变换为由 $(\theta_2,\phi_2)$ 描述的量子态的酉算符可以写成
+\[
+U
+=R_z\!\Bigl(\tfrac{\pi}{2}+\phi_2\Bigr)\;
+H\;
+R_z(\theta_2-\theta_1)\;
+H\;
+R_z\!\Bigl(-\tfrac{\pi}{2}-\phi_1\Bigr),
+\]
+其中相位移门
+\(
+R_z(\delta)=\begin{pmatrix}1&0\\[3pt]0&e^{i\delta}\end{pmatrix}
+\),
+$H$ 为 Hadamard 门。
+\end{problem}
+
+\begin{solution}
+
+\textbf{有关键恒等式如下：}
+\[
+H\,R_z(\gamma)\,H=R_x(\gamma),
+\]
+这意味着“夹在两侧的 $H$”把绕 $z$ 轴的旋转变成绕 $x$ 轴的旋转。
+\medskip
+
+从态 $\lvert\psi(\theta_1,\phi_1)\rangle$ 出发，先作用
+\[
+R_z\!\Bigl(-\tfrac{\pi}{2}-\phi_1\Bigr),
+\]
+这相当于把态在平面内逆时针旋转，使其\emph{局部经线}与 $x$ 轴对齐。直观理解：先把方位角减掉（$-\phi_1$），再补一个 $-\tfrac{\pi}{2}$，为后续用 $H$ 把“绕 $z$ 轴旋转”转成“绕 $x$ 轴旋转”做好轴向对齐。
+
+\medskip
+
+作用 $H$，则后续一个 $R_z$ 就等价于 $R_x$：
+\[
+H\,R_z(\gamma)\,H=R_x(\gamma).
+\]
+因此序列
+\[
+H\,R_z(\theta_2-\theta_1)\,H
+\]
+等价于
+\[
+R_x(\theta_2-\theta_1).
+\]
+这一步的物理意义很直白：沿 $x$ 轴把极角从 $\theta_1$ 调到 $\theta_2$。也就是仅改变“与北极南极的距离”，而不引入新的方位角。
+
+\medskip
+
+最后再绕 $z$ 轴加上
+\[
+R_z\!\Bigl(\tfrac{\pi}{2}+\phi_2\Bigr),
+\]
+把方位设置为 $\phi_2$（同样多加的 $\tfrac{\pi}{2}$ 与第一步的 $-\tfrac{\pi}{2}$ 成对，保证整体轴系一致）。
+
+\medskip
+
+按照时间顺序作用
+\[
+U
+=R_z\!\Bigl(\tfrac{\pi}{2}+\phi_2\Bigr)\;
+H\;
+R_z(\theta_2-\theta_1)\;
+H\;
+R_z\!\Bigl(-\tfrac{\pi}{2}-\phi_1\Bigr),
+\]
+即可把 $\lvert\psi(\theta_1,\phi_1)\rangle$ 变为 $\lvert\psi(\theta_2,\phi_2)\rangle$。因为每一步都是标准的一比特酉门，整体当然也是酉的。
+
+\medskip
+\textbf{检验：}
+若取特殊情形 $\theta_1=\theta_2$、$\phi_1=\phi_2$，则中部 $R_z(\theta_2-\theta_1)=I$，
+并且两端的 $R_z$ 恰好互为逆，整体为恒等算符；当 $\theta_2-\theta_1=\pi$ 时，中部等效 $R_x(\pi)$ 把态从“北半球”翻到“南半球”，也与 Bloch 几何一致。
+\end{solution}
+
+
+\end{document}

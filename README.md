@@ -57,8 +57,10 @@ This part of the page is reserved for research projects, technical exploration, 
 
 | Project | What it is |
 | --- | --- |
-| [`USTC-used-market`](https://github.com/SiyueHao/USTC-used-market) | A database development project. / 一个数据库开发项目。 |
-| `More coming soon` | I will gradually add research-related repos, notes, and project summaries here. / 后续会逐步补充科研相关仓库与总结。 |
+| [`database-lab`](./projects/database-lab) | My database course project materials, with reports and setup notes. / 我的数据库课程项目资料，含报告与运行说明。 |
+| [`data-centric-recsys-notes`](./projects/data-centric-recsys-notes) | A survey deck on data-centric recommender systems and follow-up ideas. / 关于 Data-Centric 推荐系统的调研与想法。 |
+| [`opd-study-and-reproduction`](./projects/opd-study-and-reproduction) | Notes on OPD, self-distillation, and related reproduction work. / 关于 OPD、自蒸馏与复现工作的整理。 |
+| [`ml-gobang-rl`](./projects/ml-gobang-rl) | My machine learning course project on reinforcement learning for Gobang. / 我的机器学习课程大作业：五子棋强化学习。 |
 
 ### What Will Appear Here / 这里会逐步出现
 
@@ -78,32 +80,24 @@ This section is for semester-based course materials, organized as a long-term st
 
 | Repository | Notes |
 | --- | --- |
-| [`USTC-`](https://github.com/SiyueHao/USTC-) | Study materials collected during my time at USTC. / 计划整理并上传我在 USTC 学习期间的一些资料。 |
+| [`courses/25fall`](./courses/25fall) | A curated public archive of my 2025 fall coursework. / 我整理出来的一版 2025 Fall 课程资料公开归档。 |
+| [`USTC-`](https://github.com/SiyueHao/USTC-) | Another study-material repository that I will keep improving. / 另一个会继续整理的学习资料仓库。 |
 | [`skills-introduction-to-github`](https://github.com/SiyueHao/skills-introduction-to-github) | A small GitHub learning exercise. / 一个 GitHub 入门练习仓库。 |
 
 ### Planned Structure / 计划中的整理方式
 
 | Term | Content |
 | --- | --- |
-| `Spring / Fall` | Course notes, assignments, review sheets, and selected takeaways |
-| `Per course` | Clean repository links for materials that are worth preserving |
+| `25 Fall` | [`operations-research`](./courses/25fall/operations-research), [`algorithms`](./courses/25fall/algorithms), [`computer-networks`](./courses/25fall/computer-networks), [`artificial-intelligence-and-ml`](./courses/25fall/artificial-intelligence-and-ml), [`quantum-ml`](./courses/25fall/quantum-ml) |
+| `Later terms` | More cleaned course archives will be added over time |
 
 <a id="life"></a>
 
 ## Life / 生活
 
-I do not want this page to be made only of code and coursework.
+This part is still under construction.
 
-我不希望这个主页只有代码和课程，也想留下生活的纹理。
-
-- `Photography / 摄影`
-  Small observations, favorite frames, and moments I wanted to keep.
-- `Guitar / 吉他`
-  Practice fragments, songs I like, and slow improvement.
-- `Skateboarding / 滑板`
-  Attempts, falls, progress, and things that only make sense after repetition.
-- `Daily growth / 日常进步`
-  Habits, reading, travel, and other pieces of ordinary life.
+这一部分我暂时还没有开始系统整理。
 
 <a id="now"></a>
 

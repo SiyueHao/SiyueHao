@@ -1,0 +1,71 @@
+\documentclass[12pt]{article}
+\usepackage[UTF8]{ctex}
+\usepackage{amsmath,amssymb}
+\usepackage{braket}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+
+% 页面设置
+\geometry{a4paper, margin=1in}
+
+% 页眉页脚设置
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{量子计算与机器学习第四章作业}
+\fancyhead[R]{\today}
+\fancyfoot[C]{\thepage}
+
+% 姓名与日期
+\title{\textbf{量子计算与机器学习第四章作业}}
+\author{姓名：郝思粤\quad 学号：PB23151779}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\textbf{题目 4.1}  
+证明贝尔态
+\[
+\ket{\Phi^+}=\frac{1}{\sqrt{2}}\bigl(\ket{00}+\ket{11}\bigr)
+\]
+可以等效写成
+\[
+\ket{\Phi^+}=\frac{1}{\sqrt{2}}\bigl(\ket{aa}+\ket{bb}\bigr),
+\]
+其中 $\ket{a}$ 和 $\ket{b}$ 是任意一组单比特正交归一基。
+
+\bigskip
+
+\textbf{解：}
+
+设单比特计算基为 $\{\ket{0},\ket{1}\}$。  
+给定任意一组正交归一基 $\{\ket{a},\ket{b}\}$，根据线性代数知识，必存在一个酉矩阵 $U$ 满足
+\[
+U\ket{0}=\ket{a},\qquad U\ket{1}=\ket{b}.
+\]
+
+考虑两比特系统上的酉算符 $U\otimes U$，则
+\begin{align}
+(U\otimes U)\ket{\Phi^+}
+&=(U\otimes U)\frac{1}{\sqrt{2}}\bigl(\ket{00}+\ket{11}\bigr) \\
+&=\frac{1}{\sqrt{2}}\bigl(U\ket{0}\otimes U\ket{0}
+  +U\ket{1}\otimes U\ket{1}\bigr) \\
+&=\frac{1}{\sqrt{2}}\bigl(\ket{a}\otimes\ket{a}
+  +\ket{b}\otimes\ket{b}\bigr) \\
+&=\frac{1}{\sqrt{2}}\bigl(\ket{aa}+\ket{bb}\bigr).
+\end{align}
+
+因此有
+\[
+\frac{1}{\sqrt{2}}\bigl(\ket{aa}+\ket{bb}\bigr)
+= (U\otimes U)\ket{\Phi^+}.
+\]
+
+即贝尔态在任意单比特正交归一基下均可等效写成
+\[
+\ket{\Phi^+}=\frac{1}{\sqrt{2}}\bigl(\ket{aa}+\ket{bb}\bigr),
+\]
+证毕。
+
+\end{document}

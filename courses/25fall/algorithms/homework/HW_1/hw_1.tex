@@ -1,0 +1,473 @@
+\documentclass[12pt,a4paper,oneside]{ctexart}
+\usepackage{amsmath,amsthm,amssymb,bm,color,framed,graphicx,hyperref,mathrsfs,fancyhdr}
+
+\title{\textbf{算法基础 Homework 1}}
+\author{郝思粤 \\ 学号 PB23151779 \\ 中国科学技术大学}
+\date{\today}
+\linespread{1.5}
+\definecolor{shadecolor}{RGB}{241,241,255}
+
+% 页眉页脚
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{算法基础 Homework 1}
+\fancyhead[R]{PB23151779}
+\fancyfoot[C]{\thepage}
+
+% Problem 环境
+\newcounter{problemname}
+\newenvironment{problem}{
+    \begin{shaded}
+    \stepcounter{problemname}
+    \addcontentsline{toc}{section}{题目\arabic{problemname}}
+    \noindent\textbf{题目\arabic{problemname}. }
+}{
+    \end{shaded}\par
+}
+\newenvironment{solution}{
+    \addcontentsline{toc}{subsection}{解答}
+    \noindent\textbf{解答. }
+}{\par}
+\newenvironment{note}{
+    \addcontentsline{toc}{subsection}{注记}
+    \noindent\textbf{题目\arabic{problemname}的注记. }
+}{\par}
+
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\begin{problem}
+（ 5 $\times$ 2 = 10 分）判断以下命题的正误。若正确，请给出证明；若错误，请给出反例。
+
+1. 若 \( f(n) = \Theta(g(n)) \)，则有 \( \lg(f(n)) = \Theta(\lg g(n)) \)。
+
+2. 若 \( f(n) = \sum_{i}^{l} b_{i} n^{i} \)，且 \( b_{l} > 0 \)，则有 \( f(n) = \Theta(n^{l}) \).
+
+\end{problem}
+
+\begin{solution} 
+\par 1. \textbf{错误（一般不成立）。}
+    令对所有 \(n\)，
+    \[
+    f(n)=2,\qquad g(n)=1.
+    \]
+    显然 \(f(n)=\Theta(g(n))\)，因为存在常数 \(c_1=1,c_2=2\) 及 \(n_0=1\) 使得对所有 \(n\ge n_0\) 有
+    \[
+    c_1 g(n) \leq  f(n) \leq c_2 g(n)
+    \]
+   但
+    \[
+    \lg f(n)=\lg 2 = 1,\qquad \lg g(n)=\lg 1 = 0.
+    \]
+    于是不可能存在常数 \(a,b>0\) 使得 \(a\cdot \lg g(n)\le \lg f(n)\le b\cdot \lg g(n)\) 对 足够大的 \(n\) 成立（因为右侧始终为 $0$）。因此 \(\lg f(n)\) 不是 \(\Theta(\lg g(n))\)。
+
+\par 2. \textbf{正确。}
+    设
+    \[
+    f(n)=b_{\ell}n^{\ell}+\sum_{i=k}^{\ell-1} b_i n^i,
+    \]
+    其中 \(b_{\ell}>0\)。
+
+    \textbf{上界：} 对所有 \(n\ge 1\)，因为当 \(i\le \ell\) 时 \(n^i \le n^{\ell}\)，有
+    \[
+    f(n) \le \sum_{i=k}^{\ell} |b_i| n^i \le \Big(\sum_{i=k}^{\ell} |b_i|\Big) n^{\ell}.
+    \]
+    取 \(c_2=\sum_{i=k}^{\ell} |b_i|\)，则 \(f(n)\le c_2 n^{\ell}\)，即 \(f(n)=O(n^{\ell})\)。
+
+    \textbf{下界：} 写作
+    \[
+    f(n)=b_{\ell}n^{\ell}+\sum_{i=k}^{\ell-1} b_i n^i.
+    \]
+    令 \(C=\sum_{i=k}^{\ell-1} |b_i|\)，则
+    \[
+    \Big|\sum_{i=k}^{\ell-1} b_i n^i\Big| \le C n^{\ell-1}.
+    \]
+    于是
+    \[
+    f(n) \ge b_{\ell}n^{\ell} - C n^{\ell-1}
+    = n^{\ell}\left(b_{\ell}-\tfrac{C}{n}\right).
+    \]
+    由于 \(b_{\ell}>0\)，取 \(n_0=\max\{1,\lceil 2C/b_{\ell}\rceil\}\)，则当 \(n\ge n_0\) 时有
+    \[
+    f(n)\ge \frac{b_{\ell}}{2} n^{\ell}.
+    \]
+    取 \(c_1=b_{\ell}/2\)，即得 \(f(n)\ge c_1 n^{\ell}\)，即 \(f(n)=\Omega(n^{\ell})\)。
+
+    \textbf{结论：} 综上，存在常数 \(c_1,c_2>0\) 与 \(n_0\)，使得对所有 \(n\ge n_0\) 有
+    \[
+    c_1 n^{\ell} \le f(n) \le c_2 n^{\ell}.
+    \]
+    因此，\(f(n)=\Theta(n^{\ell})\)。
+
+\end{solution}
+
+\begin{note}
+\par 第一小问成立的条件：
+\begin{itemize}
+    \item \(f(n)\) 和 \(g(n)\) 都是正函数（即对所有 \(n\) 都大于零）。
+    \item \(f(n)\) 和 \(g(n)\) 都是单调递增的。
+\end{itemize}
+\end{note}
+
+
+\begin{problem}
+Q2. (15 + 15 + 10 = 40 分) 函数 \( A: \mathbb{N}^2 \to \mathbb{N} \) 在一些算法的时间复杂度分析中具有重要应用，其定义如下：
+
+\[
+A(m, n) = 
+\left\{
+\begin{array}{ll}
+n + 1, & \text{若 } m = 0 \\[1ex]
+A(m-1, 1), & \text{若 } m > 0,\, n = 0 \\[1ex]
+A(m-1, A(m, n-1)), & \text{若 } m > 0,\, n > 0
+\end{array}
+\right.
+\]
+
+
+(1) 证明 \( A \) 是良定义的，即对于任意 \( m, n \in \mathbb{N} \)，\( A(m, n) \) 的递归定义总能终止。
+
+(2) 证明 \( A(m, n) \) 关于 \( m, n \) 分别单调递增，即：
+\[
+\begin{aligned}
+A(m + 1, n) &> A(m, n) \\
+A(m, n + 1) &> A(m, n)
+\end{aligned}
+\]
+
+(3) \(\alpha(x)\) 定义为使得 \( A(n, n) \leq x \) 的最大自然数 \( n \)。证明：
+\[
+\begin{aligned}
+\alpha(x) &= \omega(1) \\
+\alpha(x) &= O(\lg^* x)
+\end{aligned}
+\]
+
+其中 \(\lg^* x\) 为迭代对数函数。
+\end{problem}
+
+\begin{solution}
+
+\par 1： 证明 $A$ 是良定义的
+
+\textbf{证明（按 $m$ 的完全归纳）}：
+
+ 若 $m=0$，按定义
+\[
+A(0,n)=n+1,\qquad \forall n\ge 0,
+\]
+此时递归显然终止。故命题对 $m=0$ 成立。
+
+\textbf{归纳假设：} 假设对任意 $k$ 满足 $0\le k\le m$，以及任意 $n\in\mathbb{N}$，$A(k,n)$ 都能终止并给出一个自然数值。
+接下来证明命题对 $m+1$ 也成立：即对任意 $n$，$A(m+1,n)$ 终止。
+
+\textbf{对 $n$ 作归纳（在固定的 $m+1$ 下）：}
+
+\begin{itemize}
+  \item 当 $n=0$ 时，由定义有
+    \[
+    A(m+1,0)=A(m,1).
+    \]
+    右边属于第一个参数不超过 $m$ 的情形，故按归纳假设 $A(m,1)$ 终止，因此 $A(m+1,0)$ 终止。
+
+  \item 归纳步：设对某个 $n\ge0$，已知 $A(m+1,t)$ 对所有 $t\le n$ 都终止。考虑
+    \[
+    A(m+1,n+1)=A\bigl(m,\,A(m+1,n)\bigr).
+    \]
+    根据归纳假设（关于 $n$），$A(m+1,n)$ 终止并产生某个自然数值，记作 $y$. 由于 $y\in\mathbb{N}$ 且 $m\le m$，按外层关于 $m$ 的归纳假设（对所有 $k\le m$ 都成立），$A(m,y)$ 也必终止。于是 $A(m+1,n+1)$ 终止。
+\end{itemize}
+
+由 $n$ 的归纳原理，固定的 $m+1$ 对所有 $n$ 都成立；即对任意 $n$，$A(m+1,n)$ 终止。
+
+由对 $m$ 的完全归纳，命题对所有 $m$ 成立。故对任意 $m,n\in\mathbb{N}$，$A(m,n)$ 的递归定义均能在有限步内低轨到到m = 0或是n = 0的情况，并可得出确定值，函数 $A$ 定义良好。
+
+\hfill$\square$
+
+\par 2： 证明单调性
+
+\textbf{命题}：对任意 $m,n\in\mathbb{N}$，
+\[
+A(m+1,n) > A(m,n), \qquad A(m,n+1) > A(m,n).
+\]
+
+\medskip
+\textbf{证明}：对 $m$ 作完全归纳。
+
+\textbf{当 $m=0$ 时}，
+\[
+A(0,n)=n+1,\quad A(1,n)=n+2,
+\]
+显然 $A(1,n)>A(0,n)$，且 $A(0,n+1)=n+2>A(0,n)$。命题成立。
+
+\textbf{归纳假设}：假设对所有 $k\leq m$，命题成立。
+
+\textbf{归纳步}：证明对 $m+1$ 命题成立。
+
+\emph{(i) 关于第二个参数的单调性：}
+对 $n$ 归纳。
+\[
+A(m+1,0)=A(m,1),\quad A(m+1,1)=A(m,A(m+1,0)).
+\]
+由归纳假设，$A(m,\cdot)$ 随参数严格递增，因而 $A(m+1,1)>A(m+1,0)$。  
+若已知 $A(m+1,n+1)>A(m+1,n)$，则
+\[
+A(m+1,n+2)=A(m,A(m+1,n+1)) > A(m,A(m+1,n))=A(m+1,n+1),
+\]
+由此得证 $A(m+1,n)$ 关于 $n$ 严格递增。
+
+\emph{(ii) 关于第一个参数的单调性：}
+同样对 $n$ 归纳。
+
+当 $n=0$ 时，利用归纳假设中 $A(m,\cdot)$ 的单调性，得到：
+  \[
+  A(m+2,0)=A(m+1,1)=A(m,A(m,1))>A(m,1)=A(m+1,0),
+  \]
+  
+
+若已知 $A(m+2,n)>A(m+1,n)$，则
+  \[
+  A(m+2,n+1)=A(m+1,A(m+2,n)) > A(m,A(m+2,n)) > A(m,A(m+1,n))=A(m+1,n+1),
+  \]
+  第一不等式由归纳假设（较小的 $m$ 情形）保证，第二不等式由 $A(m,\cdot)$ 的单调性保证。
+
+因此 $A(m+2,n)>A(m+1,n)$ 对任意 $n$ 成立。
+
+综上，命题对所有 $m,n$ 成立。
+
+\hfill$\square$
+
+\par 3： 证明 $\alpha(x)$ 的渐近性质
+
+\textbf{(i) 证明 $\alpha(x)=\omega(1)$}
+
+由定义有，即证，对任意常数 $c>0$，存在 $x_0 > 0$, 使得对所有 $x\ge x_0$，都有$\alpha(x)>c$。
+\par 由 $A$ 的递增性，对于$m<n$,有$A(n,n)>A(m,n)>A(m,m)$,不妨设$m=c$,则当$x\ge A(c,c)$时,$\alpha(x)\ge c+1>c$.
+\par 取$x_0=A(c,c)$,则对所有$x\ge x_0$,有$\alpha(x)>c$.因此$\alpha(x)=\omega(1)$
+\end{solution}
+
+\textbf{(ii) 证明\quad $\alpha(x) = O(\lg^\ast x)$.}
+
+根据定义，$\alpha(x)$ 为满足
+\[
+A(\alpha(x), \alpha(x)) \leq x
+\]
+的最大自然数。为了得到 $\alpha(x)$ 的上界，先讨论 $m$较小 时 Ackermann 函数的具体形式：
+\[
+A(1,n) = n+2, \quad A(2,n) = 2n+3, \quad A(3,n) = 2^{n+3}-3.
+\]
+
+对于 $m=4$，递推定义给出：
+\[
+A(4,n) = A(3, A(4,n-1)).
+\]
+逐步展开可得
+\[
+A(4,n) = \mathsf{tower}_2(n+3) - 3,
+\]
+其中 $\mathsf{tower}_2(k)$ 表示一个以 $2$ 为底、指数高度为 $k$ 的幂塔，即
+\[
+\mathsf{tower}_2(1) = 2,\quad \mathsf{tower}_2(2) = 2^2,\quad \mathsf{tower}_2(3) = 2^{2^2}, \quad \dots
+\]
+
+由 $\alpha(x)$ 的定义，必有
+\[
+A(\alpha(x), \alpha(x)) \leq x.
+\]
+当 $\alpha(x) \geq 4$ 时，有
+\[
+A(\alpha(x), \alpha(x)) \geq A(4,\alpha(x)) = \mathsf{tower}_2(\alpha(x)+3)-3.
+\]
+因此推出
+\[
+\mathsf{tower}_2(\alpha(x)+3) - 3 \leq x.
+\]
+
+另一方面，迭代对数函数 $\lg^\ast x$ 的定义是：对 $x$ 连续取对数，直至结果不大于 1 所需的次数。它等价于
+\[
+\mathsf{tower}_2(\lg^\ast x) \geq x.
+\]
+
+由不等式
+\[
+\mathsf{tower}_2(\alpha(x)+3) \leq x \leq \mathsf{tower}_2(\lg^\ast x),
+\]
+可知
+\[
+\alpha(x)+3 \leq \lg^\ast x.
+\]
+
+于是，
+\[
+\alpha(x) \leq \lg^\ast x - 3,
+\]
+说明 $\alpha(x)$ 的增长速度至多与 $\lg^\ast x$ 同阶。因此：
+\[
+\alpha(x) = O(\lg^\ast x).
+\]
+\hfill $\blacksquare$
+
+
+
+\begin{problem}
+Q3.（\( 3 \times 5 = 15 \) 分）假设你有以下列出的五种运行时间的算法。（假设这些是作为输入大小 \( n \) 函数执行的确切操作次数。）假设你有一台计算机，每秒可以执行 \( 10^{10} \) 次操作，你需要在最多一个小时的计算时间内得到结果。对于每种算法，你能在一小时内得到结果的最大输入大小 \( n \) 是多少？
+
+\begin{enumerate}
+    \item \( n^4 \)
+    \item \( 100n^2 \)
+    \item \( n \log n \)
+    \item \( 2^n \)
+    \item \( 2^{2^n} \)
+\end{enumerate}
+\end{problem}
+
+
+\begin{solution}
+每小时可执行的总操作次数为
+\[
+T = 10^{10} \times 3600 = 3.6 \times 10^{13}.
+\]
+
+考虑不同时间复杂度函数下的最大可处理输入规模：
+
+\begin{enumerate}
+    \item 对于 $f(n) = n^4$，需要满足
+    \[
+    n^4 \le T < (n+1)^4.
+    \]
+    两边取四次方根，得到
+    \[
+    n \le T^{1/4} < n+1 \quad \Longrightarrow \quad n \le (3.6 \times 10^{13})^{1/4} < n+1.
+    \]
+    因此，最大可处理整数输入规模为
+    \[
+    n_{\max} = 2449.
+    \]
+    
+    \item 对于 $f(n) = 100 n^2$，不等式为
+    \[
+    100 n^2 \le T < 100 (n+1)^2 \quad \Longrightarrow \quad n^2 \le 3.6 \times 10^{11} < (n+1)^2.
+    \]
+    取平方根得到
+    \[
+    n \le 6 \times 10^5 < n+1,
+    \]
+    所以最大整数输入规模为
+    \[
+    n_{\max} = 6 \times 10^5.
+    \]
+    
+    \item 对于 $f(n) = n \log_2 n$，需满足
+    \[
+    n \log_2 n \le T < (n+1) \log_2 (n+1).
+    \]
+    由于无法显式求解，采用数值近似法，得到
+    \[
+    n_{\max} \approx 9.06 \times 10^{11}.
+    \]
+    即
+    \[
+    n \le 9.06 \times 10^{11} < n+1.
+    \]
+    
+    \item 对于 $f(n) = 2^n$，不等式为
+    \[
+    2^n \le T < 2^{n+1} \quad \Longrightarrow \quad n \le \log_2 T < n+1.
+    \]
+    计算得到
+    \[
+    n \le 45.1 < n+1 \quad \Longrightarrow \quad n_{\max} = 45.
+    \]
+    
+    \item 对于 $f(n) = 2^{2^n}$，不等式为
+    \[
+    2^{2^n} \le T < 2^{2^{n+1}}.
+    \]
+    取两次对数得到
+    \[
+    n \le \log_2(\log_2 T) < n+1 \quad \Longrightarrow \quad n_{\max} = 5.
+    \]
+\end{enumerate}
+
+
+\end{solution}
+
+
+\begin{problem}(15 + 20 = 35 分)
+
+中秋佳节即将到来，科大糕点厂决定给 \( n \) 个科大幼儿园的小朋友分发科大定制月饼。小朋友们排成一队依次领取，从队头数起第 \( i(1 \leq i \leq n) \) 个小朋友有 \( a_i \) 朵小红花，分到 \( c_i \) 枚月饼。同时，为了奖励小红花多的小朋友，幼儿园园长制定了以下分发规则：
+
+\begin{itemize}
+    \item 每个小朋友至少分到 1 枚月饼 (\( c_i \geq 1 \))；
+    \item 若小朋友的小红花数多于相邻的小朋友的小红花数，则其分到的月饼数也多于相邻的小朋友 (\( a_i > a_j (1 \leq i, j \leq n, |i - j| = 1) \Rightarrow c_i > c_j \))；
+\end{itemize}
+
+\begin{enumerate}
+    \item 若 \( n = 5, a_1 = 1, a_2 = 3, a_3 = 3, a_4 = 5, a_5 = 2 \)，请给出一个满足以上规则的月饼分配方案。
+    
+    \item 现在 \( n, a_i \) 已知，请设计满足以上规则的分发方案（算法），输出每个小朋友分到的月饼数 \( c_i \)，同时使得 \(\sum_{i=1}^n c_i\) 最小。给出该算法的伪代码。（不需要证明算法的最优性）
+\end{enumerate}
+
+\end{problem}
+
+
+\begin{solution}
+\par 1.
+
+\textbf{解答：}
+
+直接可以根据规则手工分配,一个满足规则的分配方案为：
+
+\[
+\boxed{c = (1,2,2,3,1)}
+\]
+
+
+\par 2.
+
+
+\textbf{算法思路：}
+
+\begin{enumerate}
+    \item 初始化每个小朋友 $c_i = 1$；
+    \item 从左往右遍历小朋友,使得其满足规则约束：
+    \begin{itemize}
+        \item 若 $a_i > a_{i-1}$，则 $c_i = c_{i-1} + 1$
+    \end{itemize}
+    \item 从右往左遍历小朋友，使得其满足规则约束：
+    \begin{itemize}
+        \item 若 $a_i > a_{i+1}$，则 $c_i = \max(c_i, c_{i+1}+1)$
+    \end{itemize}
+    \item 输出 $c = (c_1, c_2, \dots, c_n)$
+\end{enumerate}
+
+\textbf{伪代码如下：}
+
+\begin{verbatim}
+Input: n, a[1..n]
+Output: c[1..n]
+
+1. 初始化 c[i] = 1, i = 1..n
+
+2. 从左往右遍历:
+   for i = 2 to n:
+       if a[i] > a[i-1]:
+           c[i] = c[i-1] + 1
+
+3. 从右往左遍历:
+   for i = n-1 downto 1:
+       if a[i] > a[i+1]:
+           c[i] = max(c[i], c[i+1] + 1)
+
+4. 输出 c[1..n]
+\end{verbatim}
+
+
+\end{solution}
+
+
+
+
+\end{document}
