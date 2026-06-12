@@ -1,86 +1,119 @@
 <h1 align="center">Siyue Hao</h1>
 
 <p align="center">
-  <em>A bilingual notebook of research, coursework, and life.</em>
+  <em>Research, coursework, and ordinary life — written down in both Chinese and English.</em>
   <br />
-  <em>一个持续记录科研、课程与生活的双语主页。</em>
+  <em>把科研、课程与生活慢慢写下来，做成一个长期更新的个人主页。</em>
 </p>
 
 <p align="center">
-  <a href="#research--科研">Research</a> ·
-  <a href="#courses--课程">Courses</a> ·
-  <a href="#life--生活">Life</a>
+  <a href="#research">Research</a> ·
+  <a href="#courses">Courses</a> ·
+  <a href="#life">Life</a> ·
+  <a href="#now">Now</a>
 </p>
 
-> I am building this profile as a long-term archive of what I study, make, and enjoy.
+> [!NOTE]
+> This profile is meant to feel more like a notebook than a resume.
 >
-> 我希望把这里做成一个长期更新的个人主页，记录我正在学习的内容、做过的项目，以及生活中的兴趣与成长。
+> 我希望这里更像一本持续生长的个人笔记，而不只是静态简历。
+
+<table>
+  <tr>
+    <td valign="top" width="33%">
+      <h3>Research / 科研</h3>
+      <p>Projects, reading notes, experiments, and questions worth chasing.</p>
+      <p>项目、阅读、实验，以及那些值得认真追问的问题。</p>
+    </td>
+    <td valign="top" width="33%">
+      <h3>Courses / 课程</h3>
+      <p>Semester archives, notes, assignments, and useful study materials.</p>
+      <p>学期记录、课程笔记、作业整理和一些能反复使用的学习资料。</p>
+    </td>
+    <td valign="top" width="33%">
+      <h3>Life / 生活</h3>
+      <p>Photography, guitar, skateboarding, and the slow evidence of growth.</p>
+      <p>摄影、吉他、滑板，以及那些不显眼但真实发生的成长。</p>
+    </td>
+  </tr>
+</table>
 
 ## About / 关于我
 
 - `Siyue Hao / 郝思粤`
 - `USTC student`
-- Interested in learning through projects, notes, and long-form accumulation.
-- This profile is currently under active construction.
+- Interested in building a public archive of study, projects, and everyday progress.
+- Learning by writing things down, making repositories, and leaving a clearer trail behind.
+
+<a id="research"></a>
 
 ## Research / 科研
 
-This section is for research projects, experiments, reading notes, and anything that reflects how I explore questions seriously.
+This part of the page is reserved for research projects, technical exploration, paper notes, and project logs.
 
-这一部分会逐步整理我的科研项目、实验记录、论文阅读与相关笔记。
+这一部分会逐步整理我的科研项目、技术探索、论文阅读和阶段性记录。
 
-| Project | Summary |
+### Current Shelf / 目前在架
+
+| Project | What it is |
 | --- | --- |
-| `Project 01` | Coming soon: a research project with a concise description in both Chinese and English. |
-| `Project 02` | Coming soon: code, notes, and progress records for another ongoing topic. |
+| [`USTC-used-market`](https://github.com/SiyueHao/USTC-used-market) | A database development project. / 一个数据库开发项目。 |
+| `More coming soon` | I will gradually add research-related repos, notes, and project summaries here. / 后续会逐步补充科研相关仓库与总结。 |
 
-<!--
-Replace the placeholder rows above with your real projects.
-Suggested format:
-| `Repo or Project Name` | One-line bilingual summary + links to code / paper / notes. |
--->
+### What Will Appear Here / 这里会逐步出现
+
+- Research notes with clearer structure
+- Project summaries in both Chinese and English
+- Reading traces: papers, experiments, and failed attempts that were still worth keeping
+
+<a id="courses"></a>
 
 ## Courses / 课程
 
-This section is for semester-based learning materials: lecture notes, assignments, labs, reviews, and course summaries.
+This section is for semester-based course materials, organized as a long-term study archive.
 
-这一部分会按照学期和课程整理学习资料，包括笔记、作业、实验和复习总结。
+这一部分会更像一个长期维护的课程资料库，按学期和课程逐步展开。
 
-| Semester | Course | Notes |
-| --- | --- | --- |
-| `2026 Spring` | `Course Name` | Notes / Assignments / Review |
-| `2026 Spring` | `Course Name` | Notes / Assignments / Review |
-| `2025 Fall` | `Course Name` | Notes / Assignments / Review |
+### Existing Repository / 现有仓库
 
-<!--
-You can later split this section into separate course repositories.
-Example:
-| `2026 Spring` | `Algorithms` | lecture notes, homework, exam review |
--->
+| Repository | Notes |
+| --- | --- |
+| [`USTC-`](https://github.com/SiyueHao/USTC-) | Study materials collected during my time at USTC. / 计划整理并上传我在 USTC 学习期间的一些资料。 |
+| [`skills-introduction-to-github`](https://github.com/SiyueHao/skills-introduction-to-github) | A small GitHub learning exercise. / 一个 GitHub 入门练习仓库。 |
+
+### Planned Structure / 计划中的整理方式
+
+| Term | Content |
+| --- | --- |
+| `Spring / Fall` | Course notes, assignments, review sheets, and selected takeaways |
+| `Per course` | Clean repository links for materials that are worth preserving |
+
+<a id="life"></a>
 
 ## Life / 生活
 
-This section is for the parts of life that make the page feel personal rather than purely academic.
+I do not want this page to be made only of code and coursework.
 
-这一部分会记录那些让我不只是“在学习”的内容，而是作为一个真实的人正在成长的痕迹。
+我不希望这个主页只有代码和课程，也想留下生活的纹理。
 
 - `Photography / 摄影`
-  Visual observations, favorite shots, and small stories behind them.
+  Small observations, favorite frames, and moments I wanted to keep.
 - `Guitar / 吉他`
-  Practice logs, songs I like, and fragments of progress.
+  Practice fragments, songs I like, and slow improvement.
 - `Skateboarding / 滑板`
-  Milestones, failures, retries, and moments that felt worth remembering.
-- `Other small wins / 其他进步`
-  Books, habits, travel, and the quiet parts of daily life.
+  Attempts, falls, progress, and things that only make sense after repetition.
+- `Daily growth / 日常进步`
+  Habits, reading, travel, and other pieces of ordinary life.
 
-## Current Focus / 近期关注
+<a id="now"></a>
 
-- Building a cleaner archive for my research and study materials.
-- Turning scattered notes into public and reusable repositories.
-- Keeping this profile warm, honest, and regularly updated.
+## Now / 近期
 
-## To Be Continued / 持续更新
+- Building a cleaner personal archive on GitHub
+- Turning scattered notes into reusable repositories
+- Making this profile feel warmer, clearer, and more alive over time
 
-If you visit this page again later, I hope it will look a little fuller than it does today.
-
-如果你以后再来看，希望这里会比今天更完整一点。
+> [!TIP]
+> If you come back later, I hope this page will look fuller, sharper, and more personal than it does today.
+>
+> 如果你以后再回来，希望这里会比今天更完整，也更像真正的我。
